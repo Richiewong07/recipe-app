@@ -27,6 +27,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/', function(req, res) {
   res.render('index');
   // console.log('TEST');
+
+  pg.connect(connectionString, (err, client, done) => {
+    // Handle connection errors
+    if(err) {
+      done();
+      console.log(err);
+      return res.status(500).json({success: false, data: err});
+    }
 })
 
 // Server
