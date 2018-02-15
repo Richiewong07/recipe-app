@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', function(req, res) {
-  res.render('index');
+  // res.render('index');
   // console.log('TEST');
 
   pg.connect(connectionString, (err, client, done) => {
@@ -35,6 +35,11 @@ app.get('/', function(req, res) {
       console.log(err);
       return res.status(500).json({success: false, data: err});
     }
+
+    // client.query('SELECT * FROM items ORDER BY id ASC')  {
+    //
+    // }
+
 })
 
 // Server
