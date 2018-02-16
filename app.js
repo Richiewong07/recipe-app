@@ -3,9 +3,9 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var cons = require('consolidate');
 var dust = require('dustjs-helpers');
-// var pg = require('pg');
-
-const { Pool, Client } = require('pg')
+var pg = require('pg');
+var pgp = require('pg-promise');
+// var db = pgp({database: 'recipebookdb'});
 
 
 app = express();
@@ -28,10 +28,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', function(req, res) {
+
   // res.render('index');
   // console.log('TEST');
 
-//   pg.connect(connect, function(err, client, done) {
+//   var pool = new pg.Pool()
+//
+//   pool.connect(function(err, client, done) {
 //     if(err) {
 //       return console.error('error fetching client from pool', err);
 //     }
@@ -43,13 +46,10 @@ app.get('/', function(req, res) {
 //       done();
 //     });
 //   });
-  const pool = new Pool()
-  pool.query('SELECT NOW * FROM recipes', (err, res) => {
-    console.log(err, res)
-    pool.end()
-  })
+//   pool.end();
+// });
 
-})
+
 
 
 // Server
