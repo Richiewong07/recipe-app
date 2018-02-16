@@ -28,18 +28,18 @@ app.get('/', function(req, res) {
   // res.render('index');
   // console.log('TEST');
 
-  pg.connect(connectionString, (err, client, done) => {
-    // Handle connection errors
+  pg.connect(connect, function(err, client, done) {
     if(err) {
-      done();
-      console.log(err);
-      return res.status(500).json({success: false, data: err});
+      return console.error('error fetching client from pool', err);
     }
-
-    // client.query('SELECT * FROM items ORDER BY id ASC')  {
-    //
-    // }
-
+    client.query('SELECT * FROM recipes', function(err, result) {
+      if(err) {
+        return console.error('error running query', err);
+      }
+      res.render('index', {recipes: results.row});
+      done();
+    });
+  });
 })
 
 // Server
